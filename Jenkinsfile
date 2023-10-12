@@ -64,7 +64,7 @@ pipeline{
         stage('Docker iamge build'){
             steps{
                 script{
-                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_ID honeyttt/$JOB_NAME:v1.$BUILD_ID'
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_ID honeyttt/$JOB_NAME:latest'
                 }
