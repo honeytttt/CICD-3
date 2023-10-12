@@ -70,6 +70,17 @@ pipeline{
                 }
             }
         }
+        stage('Push the images to Dockerhub repo'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_pass')]) {
+                        sh 'docker login -u honeyttt -p ${docker_pass}'
+                        sh 'docker image push honeyttt/$JOB_NAME:v1.$BUILD_ID'
+                        sh 'docker image push honeyttt/$JOB_NAME:latest'
+                    }
+                }
+            }
+        }
     }
     
 }
