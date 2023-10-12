@@ -40,7 +40,7 @@ pipeline{
         stage('adding war file to nexus repository'){
             steps{
                 script{
-                    
+
                     def readPomVersion = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts: 
                     [
@@ -58,6 +58,15 @@ pipeline{
                         protocol: 'http', 
                         repository: 'cicd-3', 
                         version: "${readPomVersion.version}"
+                }
+            }
+        }
+        stage('Docker iamge build'){
+            steps{
+                script{
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID honeyttt/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID honeyttt/$JOB_NAME:latest'
                 }
             }
         }
