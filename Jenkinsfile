@@ -23,8 +23,10 @@ pipeline{
         }
         stage('Adding static code analysis with sonarqube'){
             steps{
-                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                    sh 'mvn clean package sonar:sonar'
+                script{
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
