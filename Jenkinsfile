@@ -16,6 +16,11 @@ pipeline{
                 sh 'mvn verify -DskipUnitTests'
             }
         }
+        stage('Building the application war for cicd-3'){
+            steps{
+                sh 'mvn clean install'
+            }
+        }
     }
     
 }
