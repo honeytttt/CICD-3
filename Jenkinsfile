@@ -11,6 +11,11 @@ pipeline{
                 sh 'mvn test'
             }
         }
+        stage("Integration testing for cicd-3"){
+            steps{
+                sh 'mvn verify -DskipUnitTests'
+            }
+        }
     }
     
 }
